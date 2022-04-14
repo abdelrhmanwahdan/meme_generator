@@ -62,15 +62,21 @@ def meme_form():
 def meme_post():
     """Create a user defined meme."""
     image_url = request.form.get("image_url")
-    image_data = requests.get(image_url, stream=True).content
-    image = "./temp.jpeg"
-    with open(image, "wb") as file:
-        file.write(image_data)
-    qoute = request.form.get("body")
-    author = request.form.get("author")
-    path = meme.make_meme(image, qoute, author)
-    os.remove(image)
-    return render_template("meme.html", path=path)
+    if not image_url:
+        return render_template("meme_form.html")
+    try:
+        image_data = requests.get(image_url, stream=True).content
+        image = "./temp.jpeg"
+        with open(image, "wb") as file:
+            file.write(image_data)
+        qoute = request.form.get("body")
+        author = request.form.get("author")
+        path = meme.make_meme(image, qoute, author)
+        return render_template("meme.html", path=path)
+
+    except Exception as e:
+        print(e)
+        return render_template("meme_form.html")
 
 
 if __name__ == "__main__":

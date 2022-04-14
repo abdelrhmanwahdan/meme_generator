@@ -2,6 +2,8 @@
 from PIL import Image, ImageDraw, ImageFont
 import random
 
+import textwrap
+
 
 class MemeEngine:
     """An engine to generate different memes using images and qoutes."""
@@ -23,7 +25,7 @@ class MemeEngine:
         img_path: the path of the image
         text: text to write on the image
         author: author of the text
-        
+
         retrurns:
         path: path of the saved image
         """
@@ -46,10 +48,15 @@ class MemeEngine:
             random.randint(20, img_height - 50),
         )
         font = ImageFont.truetype("./_data/Fonts/arial.ttf", 20)
-        img_draw.text(random_place, f"{text} {author}", fill=(255, 0, 0), font=font)
+
+        # Wrap the qoute body.
+        wrapper = textwrap.TextWrapper(width=50)
+        string = wrapper.fill(text=text)
+
+        full_qoute = f"{string}\n{author}"
+        img_draw.text(random_place, full_qoute, fill=(255, 0, 0), font=font)
         img_name = f"{random.randint(0,10000000000)}.jpg"
         path = f"{self.output_dir}/{img_name}"
         img.save(path)
 
         return path
-
