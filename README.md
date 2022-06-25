@@ -1,6 +1,6 @@
 # Meme Generator
 
-This project is a web app meme generator which takes a bunch of qoutes with their authors and print them on different images in random places on the images you can add photos by adding your photos to photos/dog folder and you cand your qoutes in the following formats: PDF, txt, CSV, docx the project will ingest any of this file types.
+This project is a web app meme generator that takes a bunch of quotes from their authors and prints them on different images in random places on the images you can add photos by adding your photos to the photos/dog folder. You can get your quotes in the following formats: PDF, txt, CSV, or Docx the project will ingest any of these file types.
 
 ## Requirments
 
